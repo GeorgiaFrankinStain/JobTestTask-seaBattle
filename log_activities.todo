@@ -1,0 +1,19 @@
+✔ organizational tasks @started(21-03-29 17:01) @done (21-03-29 23:08) @lasted(6:07)
+   ✔ 1) it is said that we are playing with the computer, but at the same time they require you to enter the user names, not the user. Do we determine the name of the computer or is it a multiplayer game? @done (21-03-29 23:05)
+      The player will play with the computer because it says: "The placement the ships is random for the paler and for the computer".
+   ✔ 2) That is, in fact, you need to make an offline web page on which the game will work? @done (21-03-29 23:07)
+      yes. It's much easier without a server.
+
+ ✔ create git repository @done (21-03-29 22:29)
+
+ ☐ create plan
+
+ ☐ create a minimal battlefield desing (html + css)
+
+
+ ☐ install React
+    React is needed for tests.
+
+ ☐ write the rules of the game
+ 
+ ☐ create the Algorithm of the sea battle game
