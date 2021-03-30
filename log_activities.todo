@@ -1,3 +1,5 @@
+".todo" is file for Plugin for Sublime Text 3 "PlainTasks"
+
 ✔ organizational tasks @started(21-03-29 17:01) @done (21-03-29 23:08) @lasted(6:07)
    ✔ 1) it is said that we are playing with the computer, but at the same time they require you to enter the user names, not the user. Do we determine the name of the computer or is it a multiplayer game? @done (21-03-29 23:05)
       The player will play with the computer because it says: "The placement the ships is random for the paler and for the computer".
@@ -6,14 +8,24 @@
 
  ✔ create git repository @done (21-03-29 22:29)
 
- ☐ create plan
+ ✔ create plan @done (21-03-30 12:11)
 
- ☐ create a minimal battlefield desing (html + css)
-
+ ✔ create a minimal battlefield desing (html + css) @done (21-03-30 18:05)
 
  ☐ install React
     React is needed for tests.
 
  ☐ write the rules of the game
- 
  ☐ create the Algorithm of the sea battle game
+ ☐ transferring a desing from html file to react
+
+
+ desing:
+    + I wrote the minumum required of steps to win, so that it is was interesting to play in accordance with point 8. In the book: "The Psychology of Optimal Experience - Mihaly Csikszentmihalyi" it is said that we needed a global goal, the progress is interesting to track.
+    + Arial is easy to read font
+       todo desing:
+          ☐ focus on the battlefield on the move will be made
+
+
+  rules of game:
+    + Computer runs for 2 seconds

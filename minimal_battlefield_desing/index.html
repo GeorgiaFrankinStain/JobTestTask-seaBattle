@@ -1,0 +1,109 @@
+<style type="text/css">
+
+body {
+	text-align: center;
+	font-family: Arial;
+}
+
+.battlefield {
+	/*background:url(./sea.jpg);*/
+
+	background: rgba(0, 191, 255, 0.2);
+	display: inline-block;
+}
+
+.data_about_game {
+	text-align: right;
+}
+
+.title-number-steps {
+	text-align: right;
+}
+
+.number-steps {
+	text-align: left;
+}
+
+.title-number-steps {
+}
+
+.min_possible_number_steps_for_win {
+	font-size: 15px;
+}
+.number_steps {
+	font-size: 25px;
+}
+.killed_enemy {
+	color: red;
+}
+.killed_ally {
+	color: red;
+	font-weight: bold;
+}
+.ally {
+	color: green;
+	font-weight: bold;
+}
+.whose_turn {
+	color: green;
+	font-weight: bold;
+	font-size: 40px;
+}
+.lowel_signature {
+	font-size: 20px;
+}
+.title-battlefield {
+	font-weight: bold;
+	font-size: 40px;
+}
+</style>
+<div class="container" style="display: inline-block;">
+	<table style="min-width: 400px;">
+		<tr>
+			<td style="color: green;"><div class="title-battlefield">GFS</div></td>
+			<td style="text-align: right; color: red;"><div class="title-battlefield">Computer_1</div></td>
+		</tr>
+		<tr>
+			<td>
+				<div class="battlefield">
+					<table class="battlefield2">
+						<tr>
+							<td><div class="killed_ally">X</div></td>
+							<td style="text-align: right;"><div class="ally">☐</div></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>1</td>
+						</tr>
+					</table>
+				</div>
+			</td>
+			<td style="text-align: right;">
+				<div class="battlefield">
+					<table class="battlefield2">
+						<tr>
+							<td><div class="killed_enemy">✔</div></td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>3</td>
+						</tr>
+					</table>
+				</div>
+			</td>
+		</tr>
+	</table>		
+	<table class="data_about_game" style="display: block; text-align: left;">
+		<tr class="number_steps">
+			<td class="title-number-steps">(number of steps taken)</td>
+			<td class="number-steps">15</td>
+			<td rowspan="2" style="text-align: center; vertical-align: center;"><div class="whose_turn">GFS<br/><span class="lowel_signature">move</span></div></td>
+		</tr>
+		<tr class="min_possible_number_steps_for_win">
+			<td class="title-number-steps">(minimum number of steps to win)</td>
+			<td class="number-steps">5</td>
+		</tr>
+	</table>
+
+</div>
