@@ -11,3 +11,86 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+
+body {
+    text-align: center;
+    font-family: Arial;
+}
+
+.battlefield {
+    /*background:url(./sea.jpg);*/
+
+    background: rgba(0, 191, 255, 0.2);
+    display: inline-block;
+}
+
+.data_about_game {
+    display: block;
+    text-align: left;
+}
+
+.title-number-steps {
+    text-align: right;
+}
+
+.number-steps {
+    text-align: left;
+}
+
+.title-number-steps {
+}
+
+.min_possible_number_steps_for_win {
+    font-size: 15px;
+}
+.number_steps {
+    font-size: 25px;
+}
+.killed_enemy {
+    color: red;
+}
+.killed_ally {
+    color: red;
+    font-weight: bold;
+}
+.ally {
+    color: green;
+    font-weight: bold;
+}
+.ally-td {
+    text-align: right;
+}
+.td_whose_turn {
+    text-align: center;
+    vertical-align: center;
+}
+.whose_turn {
+    color: green;
+    font-weight: bold;
+    font-size: 40px;
+}
+.lowel_signature {
+    font-size: 20px;
+}
+.title-battlefield {
+    font-weight: bold;
+    font-size: 40px;
+}
+#container-id {
+    display: inline-block;
+}
+.table-battlefield {
+    min-width: 400px;
+}
+.myname {
+    color: green;
+}
+.enemy-name {
+    text-align: right;
+    color: red;
+}
+.td_with_enemy_map {
+    text-align: right;
+}

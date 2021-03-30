@@ -13,7 +13,8 @@ body {
 }
 
 .data_about_game {
-	text-align: right;
+	display: block;
+	text-align: left;
 }
 
 .title-number-steps {
@@ -44,6 +45,13 @@ body {
 	color: green;
 	font-weight: bold;
 }
+.ally-td {
+	text-align: right;
+}
+.td_whose_turn {
+	text-align: center;
+	vertical-align: center;
+}
 .whose_turn {
 	color: green;
 	font-weight: bold;
@@ -56,12 +64,28 @@ body {
 	font-weight: bold;
 	font-size: 40px;
 }
+#container-id {
+	display: inline-block;
+}
+.table-battlefield {
+	min-width: 400px;
+}
+.myname {
+	color: green;
+}
+.enemy-name {
+	text-align: right;
+	color: red;
+}
+.td_with_enemy_map {
+	text-align: right;
+}
 </style>
-<div class="container" style="display: inline-block;">
-	<table style="min-width: 400px;">
+<div class="container" id='container-id'>
+	<table class="table-battlefield">
 		<tr>
-			<td style="color: green;"><div class="title-battlefield">GFS</div></td>
-			<td style="text-align: right; color: red;"><div class="title-battlefield">Computer_1</div></td>
+			<td><div class="title-battlefield myname">GFS</div></td>
+			<td><div class="title-battlefield enemy-name">Computer_1</div></td>
 		</tr>
 		<tr>
 			<td>
@@ -69,16 +93,16 @@ body {
 					<table class="battlefield2">
 						<tr>
 							<td><div class="killed_ally">X</div></td>
-							<td style="text-align: right;"><div class="ally">☐</div></td>
+							<td class="ally-td"><div class="ally">☐</div></td>
 						</tr>
 						<tr>
 							<td></td>
-							<td>1</td>
+							<td class="ally-td">1</td>
 						</tr>
 					</table>
 				</div>
 			</td>
-			<td style="text-align: right;">
+			<td class="td_with_enemy_map">
 				<div class="battlefield">
 					<table class="battlefield2">
 						<tr>
@@ -94,16 +118,15 @@ body {
 			</td>
 		</tr>
 	</table>		
-	<table class="data_about_game" style="display: block; text-align: left;">
+	<table class="data_about_game">
 		<tr class="number_steps">
 			<td class="title-number-steps">(number of steps taken)</td>
 			<td class="number-steps">15</td>
-			<td rowspan="2" style="text-align: center; vertical-align: center;"><div class="whose_turn">GFS<br/><span class="lowel_signature">move</span></div></td>
+			<td rowspan="2" class="td_whose_turn"><div class="whose_turn">GFS<br/><span class="lowel_signature">move</span></div></td>
 		</tr>
 		<tr class="min_possible_number_steps_for_win">
 			<td class="title-number-steps">(minimum number of steps to win)</td>
 			<td class="number-steps">5</td>
 		</tr>
 	</table>
-
 </div>
