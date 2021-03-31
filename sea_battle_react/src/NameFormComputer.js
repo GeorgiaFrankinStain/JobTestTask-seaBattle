@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 
-class NameForm extends React.Component {
+class NameFormComputer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: 'User'};
+    this.state = {value: 'Computer'};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,9 +22,9 @@ class NameForm extends React.Component {
 
   render() {
     return (
-      <form id="form2" onSubmit={this.handleSubmit}>
+      <form  id="form2" onSubmit={this.handleSubmit}>
         <label>
-          <input class="myname" type="text" value={this.state.value} onChange={this.handleChange} />
+          <input class="enemy-name" type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
       </form>
     );
@@ -35,6 +35,5 @@ class NameForm extends React.Component {
 
 
 
-
-export default NameForm;
+export default NameFormComputer;
 

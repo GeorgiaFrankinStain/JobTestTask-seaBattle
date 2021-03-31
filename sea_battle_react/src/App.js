@@ -1,4 +1,4 @@
-import NameForm from './NameForm'
+import NameForm from './NameForm';
 import './App.css';
 
 
@@ -8,8 +8,8 @@ function App() {
 <div class="container" id='container-id'>
   <table class="table-battlefield">
     <tr>
-      <td><div class="title-battlefield myname" id="name_player">GFS</div></td>
-      <td><div class="title-battlefield enemy-name" id="name_computer">Computer_1</div></td>
+      <td><div class="title-battlefield myname" id="name_player"><NameForm /></div></td>
+      <td><div class="title-battlefield enemy-name" id="name_computer"><NameForm /></div></td>
     </tr>
     <tr>
       <td>
