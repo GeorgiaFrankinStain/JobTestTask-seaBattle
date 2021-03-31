@@ -26,7 +26,6 @@ class NameForm extends React.Component {
         <label>
           <input class="myname" type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
-        <input type="submit" value="Submit" />
       </form>
     );
   }
@@ -37,6 +36,7 @@ ReactDOM.render(
   <NameForm />,
   document.getElementById('name_player')
 );
+
 
 
 
