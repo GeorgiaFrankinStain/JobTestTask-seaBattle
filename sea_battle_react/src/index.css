@@ -85,6 +85,8 @@ body {
     min-width: 400px;
 }
 .myname {
+    font-size: 20px;
+    font-weight:bold;
     color: green;
 }
 .enemy-name {

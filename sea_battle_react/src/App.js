@@ -1,13 +1,15 @@
-﻿import logo from './logo.svg';
+import NameForm from './NameForm'
 import './App.css';
+
+
 
 function App() {
   return (
 <div class="container" id='container-id'>
   <table class="table-battlefield">
     <tr>
-      <td><div class="title-battlefield myname">GFS</div></td>
-      <td><div class="title-battlefield enemy-name">Computer_1</div></td>
+      <td><div class="title-battlefield myname" id="name_player">GFS</div></td>
+      <td><div class="title-battlefield enemy-name" id="name_computer">Computer_1</div></td>
     </tr>
     <tr>
       <td>
@@ -54,5 +56,6 @@ function App() {
 </div>
   );
 }
+
 
 export default App;

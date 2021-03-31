@@ -15,9 +15,15 @@
  ✔ install React @done (21-03-30 20:48)
     React is needed for tests.
 
+ ☐ transferring a desing from html file to react
+    ☐ on mouse hover a square is displayed new color
+    ☐ set player names
+    ☐ set size of battlefield
+    ☐ onclick square show coordinate
+    ☐ destruction of the ship when transmitting coordinates
+    ☐ demonstartion step of player when transmittion coordinates
  ☐ write the rules of the game
  ☐ create the Algorithm of the sea battle game
- ☐ transferring a desing from html file to react
 
  ☐ upgrade design
  ☐ upgrade algorithm
