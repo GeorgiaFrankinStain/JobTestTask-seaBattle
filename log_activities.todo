@@ -16,9 +16,9 @@
     React is needed for tests.
 
  ☐ transferring a desing from html file to react
+    ✔ set player names @done (21-03-31 21:42)
+    ✔ set size of battlefield @done (21-04-01 02:34)
     ☐ on mouse hover a square is displayed new color
-    ☐ set player names
-    ☐ set size of battlefield
     ☐ onclick square show coordinate
     ☐ destruction of the ship when transmitting coordinates
     ☐ demonstartion step of player when transmittion coordinates

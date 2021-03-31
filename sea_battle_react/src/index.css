@@ -51,6 +51,15 @@ body {
 .killed_enemy {
     color: red;
 }
+.size_battlefield_input {
+    width: 30px;
+}
+#td_margin {
+    width: 100px;
+}
+.name_player {
+    text-align: left;
+}
 .killed_ally {
     color: red;
     font-weight: bold;
