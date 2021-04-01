@@ -19,9 +19,13 @@
     ✔ set player names @done (21-03-31 21:42)
     ✔ set size of battlefield @done (21-04-01 02:34)
     ✔ onclick square show coordinate @done (21-04-01 11:21)
+    ☐ create render ships
+    ☐ create random placement of ships
+    ☐ autoset minimum number of steps to win
     ☐ on mouse hover a square is displayed new color
     ☐ destruction of the ship when transmitting coordinates
     ☐ demonstartion step of player when transmittion coordinates
+    ☐ set count and size of ships
  ☐ write the rules of the game
  ☐ create the Algorithm of the sea battle game
 

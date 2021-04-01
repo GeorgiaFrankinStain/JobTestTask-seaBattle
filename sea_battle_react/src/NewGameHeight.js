@@ -33,6 +33,33 @@ class NewGameHeight extends React.Component {
 
    stepPlayer(line, column) {
      alert(line, column);
+     //if gamer wins
+        //write game ower for computer
+
+     //if selected cell of enemy battlefield is EMPTY
+        //set miss point
+     //if is working cell of ship
+        //set destruction cell of ship
+        //decrement count enemy working cell
+
+
+      //increment count steps
+   }
+
+   stepComputer() {
+
+     //if computer wins
+        //write game ower for gamer
+
+     //if selected cell of player battlefield is EMPTY
+        //set miss point
+     //if is working cell of ship
+        //set destruction cell of ship
+        //decrement count player working cell
+   }
+
+   showGameOver(name) {
+     //FIXME
    }
 
    renderTableTr(cells) {
