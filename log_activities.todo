@@ -20,7 +20,7 @@
     ✔ set size of battlefield @done (21-04-01 02:34)
     ✔ onclick square show coordinate @done (21-04-01 11:21)
     ✔ create render ships @done (21-04-01 14:03)
-    ☐ create random placement of ships
+    ✔ create random placement of ships @done (21-04-01 17:33)
     ☐ autoset minimum number of steps to win
     ☐ on mouse hover a square is displayed new color
     ☐ destruction of the ship when transmitting coordinates

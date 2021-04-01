@@ -33,7 +33,7 @@ class NewGameHeight extends React.Component {
     }
 
    stepPlayer(line, column) {
-     alert(line, column);
+     alert(line + "y: " + column);
      //if gamer wins
         //write game ower for computer
 
@@ -73,7 +73,7 @@ class NewGameHeight extends React.Component {
             var content_input = obj[2];
 
            return (
-                 <td><div onClick={() => this.stepPlayer(line, column)}>{content_input}</div></td>
+                 <td><div id="cell_{line}_{column}" class="cell_div" onClick={() => this.stepPlayer(line, column)}>{content_input}</div></td>
            )
         })
      }
@@ -103,33 +103,65 @@ class NewGameHeight extends React.Component {
       )
    }
 
+   resetTableArray() {
+        var width =  document.getElementById("width_battlefield_input").value;
+        var height =  document.getElementById("height_battlefield_input").value;
+        this.tableArray = [];
+        for (var line = 0; line < height; line++) {
+          var lineArray = [];
+          for (var column = 0; column < width; column++) {
+            lineArray[column] = [line, column];
+          }
+          this.tableArray[line] = lineArray;
+        }
+
+
+        var listShips = [
+          // [4, 1],
+          // [3, 2],
+          [2, 2]
+          // [1, 4]
+        ];
+
+        listShips.map(obj => {
+
+            var size_ships = obj[0];
+            var count_ships = obj[1];
+            for (var i = 0; i < count_ships; i++) {
+              
+              var position = this.tryFindCoordinats(size_ships, width, height);
+              this.writeShipInValidCoodrinate(position, size_ships);
+              // alert(position);
+
+
+            }
+            return "true";
+        });
+   }
+
   handleSubmit(event) {
     //TODO: add battlefield
     var width =  document.getElementById("width_battlefield_input").value;
     var height =  document.getElementById("height_battlefield_input").value;
-    this.tableArray = [];
-    for (var line = 0; line < height; line++) {
-      var lineArray = [];
-      for (var column = 0; column < width; column++) {
-        lineArray[column] = [line, column];
-      }
-      // lineArray["content"] = "empty";
-      this.tableArray[line] = lineArray;
-    }
+
+    this.resetTableArray();
+
+
+
+
+
 
     var missContent = "⁕";
     var workingShip = "☐";
     var destructionShip = "✖";
-    this.tableArray[0][0][2] = missContent;
-    this.tableArray[1][0][2] = workingShip;
-    this.tableArray[2][0][2] = destructionShip;
-    // alert(this.tableArray);
-    // alert(this.reTable());
 
     ReactDOM.render(
       this.reTable(),
       document.getElementById('my_battlefield')
     );
+
+    this.resetTableArray();
+
     ReactDOM.render(
       this.reTable(),
       document.getElementById('enemy_battlefield')
@@ -137,7 +169,88 @@ class NewGameHeight extends React.Component {
     event.preventDefault();
   }
 
+  tryFindCoordinats(size_ships, width, height) {
+      var count_try = 0;
+      var xCoordinate;
+      var yCoordinate;
+      var orientatino;
+      while(count_try < 1000) {
+            xCoordinate = getRandomInt(0, +width);
+            yCoordinate = getRandomInt(0, +height);
+            orientatino = getRandomInt(0, 2);
 
+            if (this.isValidPositionShip(orientatino, xCoordinate, yCoordinate, width, height, size_ships)) {
+              break;
+            }
+      }
+      return [xCoordinate, yCoordinate, orientatino];
+  }
+
+  writeShipInValidCoodrinate(cooridnate, size_ships) {
+        var xCoordinate = cooridnate[0];
+        var yCoordinate = cooridnate[1];
+        var orientatino = cooridnate[2];
+
+
+            var isRight = orientatino === 0;
+            var isBottom = orientatino === 1;
+
+         for (var z = 0; z < size_ships; z++) {
+
+            var line = yCoordinate;
+            var column = xCoordinate;
+
+            var workingShip = "☐";
+           this.tableArray[line][column][2] = workingShip;
+          if (isRight) {
+              xCoordinate++;
+          } else if (isBottom) {
+              yCoordinate++;
+          } else {
+            alert("bad_branch")
+            console.assert("bad vetka: " + false);
+          }
+      }
+  }
+
+
+
+  isValidPositionShip(orientatino, xCoordinate, yCoordinate, width, height, size_ships) {
+
+
+
+            var isRight = orientatino === 0;
+            var isBottom = orientatino === 1;
+     for (var z = 0; z < size_ships; z++) {
+          if (isRight) {
+            if (this.isValidPosition(xCoordinate, yCoordinate, width, height)) {
+              xCoordinate++;
+            } else {
+              return false;
+            }
+          } else if (isBottom) {
+           if (this.isValidPosition(xCoordinate, yCoordinate, width, height)) {
+              yCoordinate++;
+            } else {
+              return false;
+            }
+          } else {
+            alert("bad_branch")
+            console.assert("bad vetka: " + false);
+          }
+      }
+      return true;
+  }
+
+  isValidPosition(xCoordinate, yCoordinate, width, height) {
+      var line = yCoordinate;
+      var column = xCoordinate;
+      var workingShip = "☐";
+      var yInclude = 0 <= yCoordinate && yCoordinate <= height;
+      var xInclude = 0 <= xCoordinate && xCoordinate <= width;
+      var isEmptyCell = (workingShip !== this.tableArray[line][column][2]);
+      return xInclude && yInclude && isEmptyCell;
+  }
 
   render() {
     return (
@@ -164,7 +277,7 @@ class NewGameHeight extends React.Component {
             </td>
           </tr>
           <tr>
-            <td colspan="2"><input type="submit" value="Submit" /></td>
+            <td colspan="2"><input type="submit" value="Начать новую игру" /></td>
           </tr>
         </table>
       </form>
@@ -174,6 +287,11 @@ class NewGameHeight extends React.Component {
 
 
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
+}
 
 
 
