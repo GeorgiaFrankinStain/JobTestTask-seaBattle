@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 class NewGameHeight extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: '10'};
+    this.state = {value: '5'};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,13 +15,39 @@ class NewGameHeight extends React.Component {
     this.setState({value: event.target.value});
   }
 
+
+
+    renderTd(line, column) {
+        return (
+            <div>
+                <div
+                    className='box'
+                    style={{background:this.state.color}}
+                    onClick={this.changeColor}
+                >
+                    In here already
+                </div>
+            </div>
+        );
+    }
+
+   stepPlayer(line, column) {
+     alert(line, column);
+   }
+
    renderTableTr(cells) {
+
+
+
+
+
         return cells.map((line, column) => {
            return (
-                 <td>({line}, {column})</td>
+                 <td><div onClick={() => this.stepPlayer(line, column)}>></div> </td>
            )
         })
      }
+
 
 
 

@@ -18,8 +18,8 @@
  ☐ transferring a desing from html file to react
     ✔ set player names @done (21-03-31 21:42)
     ✔ set size of battlefield @done (21-04-01 02:34)
+    ✔ onclick square show coordinate @done (21-04-01 11:21)
     ☐ on mouse hover a square is displayed new color
-    ☐ onclick square show coordinate
     ☐ destruction of the ship when transmitting coordinates
     ☐ demonstartion step of player when transmittion coordinates
  ☐ write the rules of the game
