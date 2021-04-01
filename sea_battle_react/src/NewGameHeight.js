@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 
 class NewGameHeight extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {value: '5'};
@@ -15,7 +16,7 @@ class NewGameHeight extends React.Component {
     this.setState({value: event.target.value});
   }
 
-
+  
 
     renderTd(line, column) {
         return (
@@ -65,12 +66,14 @@ class NewGameHeight extends React.Component {
    renderTableTr(cells) {
 
 
+        return cells.map(obj => {
 
+            var line = obj[0];
+            var column = obj[1];
+            var content_input = obj[2];
 
-
-        return cells.map((line, column) => {
            return (
-                 <td><div onClick={() => this.stepPlayer(line, column)}>></div> </td>
+                 <td><div onClick={() => this.stepPlayer(line, column)}>{content_input}</div></td>
            )
         })
      }
@@ -91,7 +94,7 @@ class NewGameHeight extends React.Component {
    reTable() {
       return (
          <div>
-            <table id='students'>
+            <table class="table-battlefield">
                <tbody>
                   {this.renderTable()}
                </tbody>
@@ -110,8 +113,16 @@ class NewGameHeight extends React.Component {
       for (var column = 0; column < width; column++) {
         lineArray[column] = [line, column];
       }
+      // lineArray["content"] = "empty";
       this.tableArray[line] = lineArray;
     }
+
+    var missContent = "⁕";
+    var workingShip = "☐";
+    var destructionShip = "✖";
+    this.tableArray[0][0][2] = missContent;
+    this.tableArray[1][0][2] = workingShip;
+    this.tableArray[2][0][2] = destructionShip;
     // alert(this.tableArray);
     // alert(this.reTable());
 

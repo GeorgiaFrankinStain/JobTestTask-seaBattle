@@ -7,7 +7,7 @@ import './App.css';
 function App() {
   return (
 <div class="container" id='container-id'>
-  <table class="table-battlefield">
+  <table>
     <tr>
       <td rowspan="2">
         <div class="title_new_game">Параметры новой игры:</div>

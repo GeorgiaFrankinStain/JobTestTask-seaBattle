@@ -90,8 +90,13 @@ body {
 #container-id {
     display: inline-block;
 }
-.table-battlefield {
-    min-width: 400px;
+.table-battlefield td {
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: center;
 }
 .myname {
     font-size: 20px;
