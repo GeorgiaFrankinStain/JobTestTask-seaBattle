@@ -123,6 +123,17 @@ class NewGameHeight extends React.Component {
           // [1, 4]
         ];
 
+        var sum = 0;
+        listShips.map(obj => {
+          sum = +sum + (+obj[1] * +obj[0]);
+        });
+
+        this.enemy_working_cells_of_ships = sum;
+        this.my_working_cells_of_ships = sum;
+        document.getElementById('number_takes_step').innerHTML = 0;
+        document.getElementById('min_possible').innerHTML = this.enemy_working_cells_of_ships;
+
+
         listShips.map(obj => {
 
             var size_ships = obj[0];
