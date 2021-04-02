@@ -290,7 +290,7 @@ isMyBatlefield = false;
       var xCoordinate;
       var yCoordinate;
       var orientatino;
-      while(count_try < 1000) {
+      while(count_try < 10000) {
             xCoordinate = getRandomInt(0, +width);
             yCoordinate = getRandomInt(0, +height);
             orientatino = getRandomInt(0, 2);

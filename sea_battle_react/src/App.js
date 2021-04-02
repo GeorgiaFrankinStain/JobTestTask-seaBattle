@@ -20,28 +20,28 @@ function App() {
     <tr>
       <td>
         <div class="battlefield" id="my_battlefield">
-          <table class="battlefield2">
+          <table class="table-battlefield">
             <tr>
               <td><div class="killed_ally">X</div></td>
               <td class="ally-td"><div class="ally">☐</div></td>
             </tr>
             <tr>
               <td></td>
-              <td class="ally-td">1</td>
+              <td class="ally-td"></td>
             </tr>
           </table>
         </div>
       </td>
       <td class="td_with_enemy_map">
         <div class="battlefield"  id="enemy_battlefield">
-          <table class="battlefield2">
+          <table class="table-battlefield">
             <tr>
               <td><div class="killed_enemy">✔</div></td>
-              <td>1</td>
+              <td></td>
             </tr>
             <tr>
-              <td>2</td>
-              <td>3</td>
+              <td></td>
+              <td></td>
             </tr>
           </table>
         </div>
@@ -55,7 +55,7 @@ function App() {
           <tr class="number_steps">
             <td class="title-number-steps" >Количество сделанных ходов: </td>
             <td class="number-steps" id="number_takes_step">0</td>
-            <td rowspan="2" class="td_whose_turn"><div class="whose_turn">GFS<br/><span class="lowel_signature">move</span></div></td>
+            <td rowspan="2" class="td_whose_turn"><div class="whose_turn">User<br/><span class="lowel_signature">move</span></div></td>
           </tr>
           <tr class="min_possible_number_steps_for_win">
             <td class="title-number-steps">Минимально возможное количетсов ходов для победы:</td>
