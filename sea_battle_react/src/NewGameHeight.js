@@ -11,6 +11,7 @@ class NewGameHeight extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
+
   }
 
   handleChange(event) {
@@ -33,38 +34,68 @@ class NewGameHeight extends React.Component {
         );
     }
 
-   stepPlayer(line, column) {
+   stepPlayer(line, column, isAttakMyBatlefield=false) {
+      if (this.game_over) {
+        return;
+      }
+
+      var missContent = "⁕";
 
 
-    var missContent = "⁕";
 
+      var idCell
+      if (!isAttakMyBatlefield) {
+          idCell = "enemy_cell_" + line + "_" + column;
+      } else {
+          idCell = "my_cell_" + line + "_" + column;
+      }
+      var is_selected_cell_of_enemy_battlefield_is_EMPTY = 
+                  0 === document.getElementById(idCell).innerHTML.length;
+      if (is_selected_cell_of_enemy_battlefield_is_EMPTY) {
+          document.getElementById(idCell).innerHTML = missContent;
+          if (!isAttakMyBatlefield) {
+            this.incrementCountSteps();
+          }
+      }
 
-var idCell = "enemy_cell_" + line + "_" + column;
-var is_selected_cell_of_enemy_battlefield_is_EMPTY = 
-            0 === document.getElementById(idCell).innerHTML.length;
-    if (is_selected_cell_of_enemy_battlefield_is_EMPTY) {
-        document.getElementById(idCell).innerHTML = missContent;
-        this.incrementCountSteps();
-    }
+      var workingShip = "☐";
 
-    var workingShip = "☐";
+      var destructionShip = "⛝";
+      var is_working_cell_of_ship = workingShip === document.getElementById(idCell).innerHTML;
 
-    var destructionShip = "⛝";
-    // var destructionShip = "✖";
-var is_working_cell_of_ship = workingShip === document.getElementById(idCell).innerHTML;
       if (is_working_cell_of_ship) {
           document.getElementById(idCell).innerHTML = destructionShip;
-          this.enemy_working_cells_of_ships--;
 
+        if (!isAttakMyBatlefield) {
+          this.enemy_working_cells_of_ships--;
+        } else {
+          this.my_working_cells_of_ships--;
+        }
+
+
+        if (!isAttakMyBatlefield) {
           this.incrementCountSteps();
+        }
 
 
 
 
           var is_player_wins = this.enemy_working_cells_of_ships == 0;
           if (is_player_wins) {
+             this.game_over = true;
              alert("player_wins");
           }
+
+          var is_computer_wins = this.my_working_cells_of_ships == 0;
+          if (is_computer_wins) {
+             this.game_over = true;
+             alert("computer_wins");
+          }
+      }
+
+
+      if (!isAttakMyBatlefield) {
+          this.stepComputer();
       }
    }
 
@@ -77,14 +108,34 @@ var is_working_cell_of_ship = workingShip === document.getElementById(idCell).in
 
    stepComputer() {
 
-     //if computer wins
-        //write game ower for gamer
 
-     //if selected cell of player battlefield is EMPTY
-        //set miss point
-     //if is working cell of ship
-        //set destruction cell of ship
-        //decrement count player working cell
+
+      var x = getRandomInt(0, +this.width);
+      var y = getRandomInt(0, +this.height);
+
+
+      while(true) {
+
+          var idCell = "my_cell_" + x + "_" + y;
+
+          var missContent = "⁕";
+          var destructionShip = "⛝";
+          var is_already_visited = missContent === document.getElementById(idCell).innerHTML
+                    ||  destructionShip === document.getElementById(idCell).innerHTML;
+          if (is_already_visited) {
+              x = getRandomInt(0, +this.width);
+              y = getRandomInt(0, +this.height);
+          } else {
+            break;
+          }
+      }
+
+
+
+
+      var isAttakMyBatlefield = true;
+      this.stepPlayer(x, y, isAttakMyBatlefield);
+
    }
 
    showGameOver() {
@@ -153,6 +204,8 @@ var is_working_cell_of_ship = workingShip === document.getElementById(idCell).in
    resetTableArray() {
         var width =  document.getElementById("width_battlefield_input").value;
         var height =  document.getElementById("height_battlefield_input").value;
+        this.width = width;
+        this.height = height;
         this.tableArray = [];
         for (var line = 0; line < height; line++) {
           var lineArray = [];
@@ -199,6 +252,12 @@ var is_working_cell_of_ship = workingShip === document.getElementById(idCell).in
 
   handleSubmit(event) {
     //TODO: add battlefield
+
+
+    this.game_over = false;
+
+
+
     var width =  document.getElementById("width_battlefield_input").value;
     var height =  document.getElementById("height_battlefield_input").value;
 

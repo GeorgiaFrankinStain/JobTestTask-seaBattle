@@ -24,7 +24,8 @@
     ✔ autoset minimum number of steps to win @done (21-04-01 17:43)
     ✔ destruction of the ship when transmitting coordinates @done (21-04-02 14:38)
     ✔ increment step of player when transmittion coordinates @done (21-04-02 15:12)
-    ☐ on mouse hover a square is displayed new color
+    ✔ on mouse hover a square is displayed new color @done (21-04-02 15:23)
+    ✔ computer response actions @done (21-04-02 16:11)
     ☐ set count and size of ships
     ☐ alert of lose or win
     ☐ enemy ships are not visible
