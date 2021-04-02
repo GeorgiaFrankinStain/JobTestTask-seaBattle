@@ -53,12 +53,12 @@ function App() {
       <td colspan="2">
         <table class="data_about_game">
           <tr class="number_steps">
-            <td class="title-number-steps">Количество сделанных шагов: </td>
+            <td class="title-number-steps" >Количество сделанных ходов: </td>
             <td class="number-steps" id="number_takes_step">0</td>
             <td rowspan="2" class="td_whose_turn"><div class="whose_turn">GFS<br/><span class="lowel_signature">move</span></div></td>
           </tr>
           <tr class="min_possible_number_steps_for_win">
-            <td class="title-number-steps">Минимально возможное количетсов шагов для победы:</td>
+            <td class="title-number-steps">Минимально возможное количетсов ходов для победы:</td>
             <td class="number-steps" id="min_possible">?</td>
           </tr>
         </table>

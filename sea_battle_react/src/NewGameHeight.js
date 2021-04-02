@@ -10,6 +10,7 @@ class NewGameHeight extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
   handleChange(event) {
@@ -33,18 +34,48 @@ class NewGameHeight extends React.Component {
     }
 
    stepPlayer(line, column) {
-     alert(line + "y: " + column);
-     //if gamer wins
-        //write game ower for computer
-
-     //if selected cell of enemy battlefield is EMPTY
-        //set miss point
-     //if is working cell of ship
-        //set destruction cell of ship
-        //decrement count enemy working cell
 
 
-      //increment count steps
+    var missContent = "⁕";
+
+
+var idCell = "enemy_cell_" + line + "_" + column;
+var is_selected_cell_of_enemy_battlefield_is_EMPTY = 
+            0 === document.getElementById(idCell).innerHTML.length;
+    if (is_selected_cell_of_enemy_battlefield_is_EMPTY) {
+        document.getElementById(idCell).innerHTML = missContent;
+        this.incrementCountSteps();
+    }
+
+    var workingShip = "☐";
+
+    var destructionShip = "⛝";
+    // var destructionShip = "✖";
+var is_working_cell_of_ship = workingShip === document.getElementById(idCell).innerHTML;
+    if (is_working_cell_of_ship) {
+        document.getElementById(idCell).innerHTML = destructionShip;
+        this.enemy_working_cells_of_ships--;
+
+        this.incrementCountSteps();
+
+
+
+
+        var is_player_wins = this.enemy_working_cells_of_ships == 0;
+        if (is_player_wins) {
+           alert("player_wins");
+        }
+    }
+
+
+
+   }
+
+   incrementCountSteps() {
+
+        var count_moves_made = document.getElementById("number_takes_step").innerHTML;
+        count_moves_made++;
+        document.getElementById("number_takes_step").innerHTML = count_moves_made;
    }
 
    stepComputer() {
@@ -59,11 +90,12 @@ class NewGameHeight extends React.Component {
         //decrement count player working cell
    }
 
-   showGameOver(name) {
+   showGameOver() {
+    alert("good");
      //FIXME
    }
 
-   renderTableTr(cells) {
+   renderTableTr(cells, isMyBatlefield) {
 
 
         return cells.map(obj => {
@@ -71,32 +103,50 @@ class NewGameHeight extends React.Component {
             var line = obj[0];
             var column = obj[1];
             var content_input = obj[2];
+           // return (
+           //       <td>
+           //          <div line="2" column="3" id="{line}" class="cell_div" onClick={() => this.stepPlayer(line, column)}>{content_input}</div>
+           //        </td>
+           // )
 
-           return (
-                 <td><div id="cell_{line}_{column}" class="cell_div" onClick={() => this.stepPlayer(line, column)}>{content_input}</div></td>
-           )
+           var idCell = "cell_" + line + "_" + column;
+           if (isMyBatlefield === true) {
+              idCell = "my_" + idCell;
+           } else {
+              idCell = "enemy_" + idCell;
+           }
+
+             if (!isMyBatlefield) {
+                var possibleClicked = () => this.stepPlayer(line, column)
+             }
+
+            return (<td><div id={idCell} class="cell_div" onClick={possibleClicked}>{content_input}</div></td>)
+
+
+
+             // return divBlock;
         })
      }
 
 
 
 
-   renderTable() {
+   renderTable(isMyBatlefield) {
       return this.tableArray.map((cells, line) => {
          return (
             <tr key="t">
-               {this.renderTableTr(cells)}
+               {this.renderTableTr(cells, isMyBatlefield)}
             </tr>
          )
       })
    }
 
-   reTable() {
+   reTable(isMyBatlefield) {
       return (
          <div>
             <table class="table-battlefield">
                <tbody>
-                  {this.renderTable()}
+                  {this.renderTable(isMyBatlefield)}
                </tbody>
             </table>
          </div>
@@ -126,6 +176,7 @@ class NewGameHeight extends React.Component {
         var sum = 0;
         listShips.map(obj => {
           sum = +sum + (+obj[1] * +obj[0]);
+          return true;
         });
 
         this.enemy_working_cells_of_ships = sum;
@@ -142,7 +193,6 @@ class NewGameHeight extends React.Component {
               
               var position = this.tryFindCoordinats(size_ships, width, height);
               this.writeShipInValidCoodrinate(position, size_ships);
-              // alert(position);
 
 
             }
@@ -164,17 +214,16 @@ class NewGameHeight extends React.Component {
 
     var missContent = "⁕";
     var workingShip = "☐";
-    var destructionShip = "✖";
-
+    var isMyBatlefield = true;
     ReactDOM.render(
-      this.reTable(),
+      this.reTable(isMyBatlefield),
       document.getElementById('my_battlefield')
     );
 
     this.resetTableArray();
-
+isMyBatlefield = false;
     ReactDOM.render(
-      this.reTable(),
+      this.reTable(isMyBatlefield),
       document.getElementById('enemy_battlefield')
     );
     event.preventDefault();

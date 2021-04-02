@@ -22,10 +22,12 @@
     ✔ create render ships @done (21-04-01 14:03)
     ✔ create random placement of ships @done (21-04-01 17:33)
     ✔ autoset minimum number of steps to win @done (21-04-01 17:43)
+    ✔ destruction of the ship when transmitting coordinates @done (21-04-02 14:38)
+    ✔ increment step of player when transmittion coordinates @done (21-04-02 15:12)
     ☐ on mouse hover a square is displayed new color
-    ☐ destruction of the ship when transmitting coordinates
-    ☐ demonstartion step of player when transmittion coordinates
     ☐ set count and size of ships
+    ☐ alert of lose or win
+    ☐ enemy ships are not visible
  ☐ write the rules of the game
  ☐ create the Algorithm of the sea battle game
 
