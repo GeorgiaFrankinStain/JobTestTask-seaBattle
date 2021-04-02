@@ -9,21 +9,33 @@ function App() {
 <div class="container" id='container-id'>
   <table>
     <tr>
-      <td rowspan="2">
+
+      <td rowspan="2" class="parameters_new_game">
         <div class="title_new_game">Параметры новой игры:</div>
         <NewGameHeight />
       </td>
       <td rowspan="2" id="td_margin"></td>
-      <td><div class="title-battlefield myname" id="name_player"><NameForm /></div></td>
-      <td><div class="title-battlefield enemy-name" id="name_computer"><NameForm /></div></td>
+      <td class="min_width_names">
+          <table>
+            <tr>
+              <td><div id="step_deteminate"></div></td>
+              <td>
+                <div class="title-battlefield myname" id="name_player">
+                    <NameForm name="User" />
+                </div>
+              </td>
+            </tr>
+          </table>
+      </td>
+      <td><div class="title-battlefield enemy-name" id="name_computer"><NameForm name="Computer" /></div></td>
     </tr>
     <tr>
       <td>
         <div class="battlefield" id="my_battlefield">
           <table class="table-battlefield">
             <tr>
-              <td><div class="killed_ally">X</div></td>
-              <td class="ally-td"><div class="ally">☐</div></td>
+              <td><div class="killed_ally"></div></td>
+              <td class="ally-td"><div class="ally"></div></td>
             </tr>
             <tr>
               <td></td>
@@ -36,7 +48,7 @@ function App() {
         <div class="battlefield"  id="enemy_battlefield">
           <table class="table-battlefield">
             <tr>
-              <td><div class="killed_enemy">✔</div></td>
+              <td><div class="killed_enemy"></div></td>
               <td></td>
             </tr>
             <tr>
@@ -55,7 +67,7 @@ function App() {
           <tr class="number_steps">
             <td class="title-number-steps" >Количество сделанных ходов: </td>
             <td class="number-steps" id="number_takes_step">0</td>
-            <td rowspan="2" class="td_whose_turn"><div class="whose_turn">User<br/><span class="lowel_signature">move</span></div></td>
+            <td rowspan="2" class="td_whose_turn"></td>
           </tr>
           <tr class="min_possible_number_steps_for_win">
             <td class="title-number-steps">Минимально возможное количетсов ходов для победы:</td>
