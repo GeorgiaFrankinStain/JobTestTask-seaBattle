@@ -52,23 +52,20 @@ var is_selected_cell_of_enemy_battlefield_is_EMPTY =
     var destructionShip = "⛝";
     // var destructionShip = "✖";
 var is_working_cell_of_ship = workingShip === document.getElementById(idCell).innerHTML;
-    if (is_working_cell_of_ship) {
-        document.getElementById(idCell).innerHTML = destructionShip;
-        this.enemy_working_cells_of_ships--;
+      if (is_working_cell_of_ship) {
+          document.getElementById(idCell).innerHTML = destructionShip;
+          this.enemy_working_cells_of_ships--;
 
-        this.incrementCountSteps();
-
-
-
-
-        var is_player_wins = this.enemy_working_cells_of_ships == 0;
-        if (is_player_wins) {
-           alert("player_wins");
-        }
-    }
+          this.incrementCountSteps();
 
 
 
+
+          var is_player_wins = this.enemy_working_cells_of_ships == 0;
+          if (is_player_wins) {
+             alert("player_wins");
+          }
+      }
    }
 
    incrementCountSteps() {
