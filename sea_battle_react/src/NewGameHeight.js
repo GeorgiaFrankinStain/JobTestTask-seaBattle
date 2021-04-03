@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import RenderTableTr from './RenderTableTr';
 
 
 class NewGameHeight extends React.Component {
@@ -21,64 +22,75 @@ class NewGameHeight extends React.Component {
 	}
 
 
+    getIdCell(isAttakMyBatlefield, line, column) {
+
+        var idCell;
+        if (!isAttakMyBatlefield) {
+            idCell = "enemy_cell_" + line + "_" + column;
+        } else {
+            idCell = "my_cell_" + line + "_" + column;
+        }
+        return idCell;
+    }
+
+    trySetMissing(idCell, isAttakMyBatlefield) {
+        var is_selected_cell_of_enemy_battlefield_is_EMPTY =
+            0 === document.getElementById(idCell).innerHTML.length;
+        if (is_selected_cell_of_enemy_battlefield_is_EMPTY) {
+            document.getElementById(idCell).innerHTML = this.missContent;
+            if (!isAttakMyBatlefield) {
+                this.incrementCountSteps();
+            }
+        }
+    }
+
+    tryDestroyShip(idCell, isAttakMyBatlefield) {
+
+        var is_working_cell_of_ship = this.workingShip === document.getElementById(idCell).innerHTML;
+        if (is_working_cell_of_ship) {
+            document.getElementById(idCell).innerHTML = this.destructionShip;
+            document.getElementById(idCell).className = "";
+
+            this.decrementCountWorkingShips(isAttakMyBatlefield);
+
+            if (!isAttakMyBatlefield) {
+                this.incrementCountSteps();
+            }
+
+            this.tryToAnnounceTheVictory();
+        }
+    }
+
+    decrementCountWorkingShips(isAttakMyBatlefield) {
+        if (!isAttakMyBatlefield) {
+            this.enemy_working_cells_of_ships--;
+        } else {
+            this.my_working_cells_of_ships--;
+        }
+    }
+
+    tryToAnnounceTheVictory() {
+        var is_player_wins = this.enemy_working_cells_of_ships === 0;
+        if (is_player_wins) {
+            this.game_over = true;
+            alert("Player wins");
+        }
+
+        var is_computer_wins = this.my_working_cells_of_ships === 0;
+        if (is_computer_wins) {
+            this.game_over = true;
+            alert("Computer wins");
+        }
+    }
 
 	stepPlayer(line, column, isAttakMyBatlefield = false) {
 		if (this.game_over) {
 			return;
 		}
 
-
-
-
-		var idCell;
-		if (!isAttakMyBatlefield) {
-			idCell = "enemy_cell_" + line + "_" + column;
-		} else {
-			idCell = "my_cell_" + line + "_" + column;
-		}
-		var is_selected_cell_of_enemy_battlefield_is_EMPTY =
-			0 === document.getElementById(idCell).innerHTML.length;
-		if (is_selected_cell_of_enemy_battlefield_is_EMPTY) {
-			document.getElementById(idCell).innerHTML = this.missContent;
-			if (!isAttakMyBatlefield) {
-				this.incrementCountSteps();
-			}
-		}
-
-		
-		var is_working_cell_of_ship = this.workingShip === document.getElementById(idCell).innerHTML;
-
-		if (is_working_cell_of_ship) {
-			document.getElementById(idCell).innerHTML = this.destructionShip;
-            document.getElementById(idCell).className = "";
-
-			if (!isAttakMyBatlefield) {
-				this.enemy_working_cells_of_ships--;
-			} else {
-				this.my_working_cells_of_ships--;
-			}
-
-
-			if (!isAttakMyBatlefield) {
-				this.incrementCountSteps();
-			}
-
-
-
-
-			var is_player_wins = this.enemy_working_cells_of_ships === 0;
-			if (is_player_wins) {
-				this.game_over = true;
-				alert("Player wins");
-			}
-
-			var is_computer_wins = this.my_working_cells_of_ships === 0;
-			if (is_computer_wins) {
-				this.game_over = true;
-				alert("Computer wins");
-			}
-		}
-
+        var idCell = this.getIdCell(isAttakMyBatlefield, line, column);
+        this.trySetMissing(idCell, isAttakMyBatlefield);
+		this.tryDestroyShip(idCell, isAttakMyBatlefield);
 
 		if (!isAttakMyBatlefield) {
 			this.stepComputer();
@@ -92,34 +104,32 @@ class NewGameHeight extends React.Component {
 		document.getElementById("number_takes_step").innerHTML = count_moves_made;
 	}
 
+
+    findCoordinats() {
+        var x = getRandomInt(0, +this.width);
+        var y = getRandomInt(0, +this.height);
+
+
+        while (true) {
+
+            var idCell = "my_cell_" + x + "_" + y;
+
+            var is_already_visited = this.missContent === document.getElementById(idCell).innerHTML
+                || this.destructionShip === document.getElementById(idCell).innerHTML;
+            if (is_already_visited) {
+                x = getRandomInt(0, +this.width);
+                y = getRandomInt(0, +this.height);
+            } else {
+                break;
+            }
+        }
+
+        return {x: x, y: y};
+    }
 	stepComputer() {
-
-
-
-		var x = getRandomInt(0, +this.width);
-		var y = getRandomInt(0, +this.height);
-
-
-		while (true) {
-
-			var idCell = "my_cell_" + x + "_" + y;
-
-			var is_already_visited = this.missContent === document.getElementById(idCell).innerHTML
-				|| this.destructionShip === document.getElementById(idCell).innerHTML;
-			if (is_already_visited) {
-				x = getRandomInt(0, +this.width);
-				y = getRandomInt(0, +this.height);
-			} else {
-				break;
-			}
-		}
-
-
-
-
+        var cooridnate = this.findCoordinats();
 		var isAttakMyBatlefield = true;
-		this.stepPlayer(x, y, isAttakMyBatlefield);
-
+		this.stepPlayer(cooridnate.x, cooridnate.y, isAttakMyBatlefield);
 	}
 
 	showGameOver() {
@@ -127,53 +137,22 @@ class NewGameHeight extends React.Component {
 		//FIXME
 	}
 
+
+
+
+
 	renderTableTr(cells, isMyBatlefield) {
-
-
-		return cells.map(obj => {
-
-			var line = obj[0];
-			var column = obj[1];
-			var content_input = obj[2];
-			// return (
-			//       <td>
-			//          <div line="2" column="3" id="{line}" class="cell_div" onClick={() => this.stepPlayer(line, column)}>{content_input}</div>
-			//        </td>
-			// )
-
-			var idCell = "cell_" + line + "_" + column;
-			if (isMyBatlefield === true) {
-				idCell = "my_" + idCell;
-			} else {
-				idCell = "enemy_" + idCell;
-			}
-
-			var className = "cell_div";
-			if (!isMyBatlefield) {
-				var possibleClicked = () => this.stepPlayer(line, column)
-				className = className + " red_hover";
-			}
-
-            var classNameData = "";
-            if (content_input === this.workingShip && !isMyBatlefield) {
-                classNameData = "hidding";
-            }
-
-			return (
-                <td>
-                    <div class={className} onClick={possibleClicked}>
-                        <div id={idCell} class={classNameData}>{content_input}</div>
-                    </div>
-                </td>
-                )
-
-
-
-			// return divBlock;
-		})
+        return cells.map(obj => {
+            var renderTableTr = new RenderTableTr({
+                isMyBatlefield: isMyBatlefield,
+                calling_object: this,
+                line: obj[0],
+                column: obj[1],
+                content_input: obj[2]
+            });
+            return renderTableTr.myRender();
+        })
 	}
-
-
 
 
 	renderTable(isMyBatlefield) {
@@ -198,84 +177,74 @@ class NewGameHeight extends React.Component {
 		)
 	}
 
+    create
+
 	resetTableArray() {
-		var width = document.getElementById("width_battlefield_input").value;
-		var height = document.getElementById("height_battlefield_input").value;
-		this.width = width;
-		this.height = height;
-		this.tableArray = [];
-		for (var line = 0; line < height; line++) {
-			var lineArray = [];
-			for (var column = 0; column < width; column++) {
-				lineArray[column] = [line, column];
-			}
-			this.tableArray[line] = lineArray;
-		}
+        this.width = document.getElementById("width_battlefield_input").value;;
+        this.height = document.getElementById("height_battlefield_input").value;;
+        this.tableArray = [];
+        for (var line = 0; line < this.height; line++) {
+            var lineArray = [];
+            for (var column = 0; column < this.width; column++) {
+                lineArray[column] = [line, column];
+            }
+            this.tableArray[line] = lineArray;
+        }
+    }
 
+    resetCountsWorkingShips() {
+        var sum = 0;
+        this.listShips.map(obj => {
+            sum = +sum + (+obj[1] * +obj[0]);
+            return true;
+        });
 
-		var listShips = [
+        this.enemy_working_cells_of_ships = sum;
+        this.my_working_cells_of_ships = sum;
+        document.getElementById('number_takes_step').innerHTML = 0;
+        document.getElementById('min_possible').innerHTML = this.enemy_working_cells_of_ships;
+    }
+
+    findCoordinatsForEachShips() {
+        this.listShips.map(obj => {
+            var size_ships = obj[0];
+            var count_ships = obj[1];
+            for (var i = 0; i < count_ships; i++) {
+                var position = this.tryFindCoordinats(size_ships, this.width, this.height);
+                this.writeShipInValidCoodrinate(position, size_ships);
+            }
+            return "true";
+        });
+    }
+
+    resetDataForGame() {
+        this.resetTableArray();
+
+		this.listShips = [
 			// [4, 1],
 			// [3, 2],
 			[2, 2]
 			// [1, 4]
 		];
 
-		var sum = 0;
-		listShips.map(obj => {
-			sum = +sum + (+obj[1] * +obj[0]);
-			return true;
-		});
+		this.resetCountsWorkingShips();
 
-		this.enemy_working_cells_of_ships = sum;
-		this.my_working_cells_of_ships = sum;
-		document.getElementById('number_takes_step').innerHTML = 0;
-		document.getElementById('min_possible').innerHTML = this.enemy_working_cells_of_ships;
-
-
-		listShips.map(obj => {
-
-			var size_ships = obj[0];
-			var count_ships = obj[1];
-			for (var i = 0; i < count_ships; i++) {
-
-				var position = this.tryFindCoordinats(size_ships, width, height);
-				this.writeShipInValidCoodrinate(position, size_ships);
-
-
-			}
-			return "true";
-		});
+        this.findCoordinatsForEachShips();
 	}
 
+    createBattlefield(isMyBatlefield, idBattlefield) {
+        this.resetDataForGame();
+        ReactDOM.render(
+            this.reTable(isMyBatlefield),
+            document.getElementById(idBattlefield)
+        );
+    }
+
 	handleSubmit(event) {
-		//TODO: add battlefield
-
-
 		this.game_over = false;
 		document.getElementById("step_deteminate").innerHTML = "ходит:";
-
-
-
-
-		this.resetTableArray();
-
-
-
-
-
-
-		var isMyBatlefield = true;
-		ReactDOM.render(
-			this.reTable(isMyBatlefield),
-			document.getElementById('my_battlefield')
-		);
-
-		this.resetTableArray();
-		isMyBatlefield = false;
-		ReactDOM.render(
-			this.reTable(isMyBatlefield),
-			document.getElementById('enemy_battlefield')
-		);
+        this.createBattlefield(true, 'my_battlefield');
+        this.createBattlefield(false, 'enemy_battlefield');
 		event.preventDefault();
 	}
 
@@ -301,7 +270,6 @@ class NewGameHeight extends React.Component {
 		var yCoordinate = cooridnate[1];
 		var orientatino = cooridnate[2];
 
-
 		var isRight = orientatino === 0;
 		var isBottom = orientatino === 1;
 
@@ -325,9 +293,6 @@ class NewGameHeight extends React.Component {
 
 
 	isValidPositionShip(orientatino, xCoordinate, yCoordinate, width, height, size_ships) {
-
-
-
 		var isRight = orientatino === 0;
 		var isBottom = orientatino === 1;
 		for (var z = 0; z < size_ships; z++) {
@@ -391,6 +356,10 @@ class NewGameHeight extends React.Component {
 			</form>
 		);
 	}
+
+
+
+
 }
 
 
